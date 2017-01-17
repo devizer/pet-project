@@ -29,7 +29,9 @@ angular.module('todomvc')
 
             api: $resource('/api/todos/:id', null,
                 {
-                    update: {method: 'PUT'}
+                    save: {method: 'POST'},
+                    update: {method: 'PUT'},
+                    delete: {method: 'DELETE'}
                 }
             ),
 
@@ -52,7 +54,7 @@ angular.module('todomvc')
                 var originalTodos = store.todos.slice(0);
 
                 store.todos.splice(store.todos.indexOf(todo), 1);
-                return store.api.delete({id: todo.id},
+                return store.api.delete({id: todo._id},
                     function () {
                     }, function error() {
                         angular.copy(originalTodos, store.todos);
@@ -70,7 +72,7 @@ angular.module('todomvc')
 
                 return store.api.save(todo,
                     function success(resp) {
-                        todo.id = resp.id;
+                        todo._id = resp._id;
                         store.todos.push(todo);
                     }, function error() {
                         angular.copy(originalTodos, store.todos);
@@ -79,7 +81,7 @@ angular.module('todomvc')
             },
 
             put: function (todo) {
-                return store.api.update({id: todo.id}, todo)
+                return store.api.update({id: todo._id}, todo)
                     .$promise;
             }
         };
