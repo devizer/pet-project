@@ -49,3 +49,4 @@ Each task should be implemented on a dedicated feature branch (following the [gi
   * ...combines all JavaScript source files into a single minified asset.
   * ...generates source maps compatible with the debugger built into the Chrome Developer Tools. 
   * ...uses `livereload` to automatically triggers a reload of static assets in the browser as required.
+* **_TODO-4_: Document the REST API using Swagger**, then use some tooling such as [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) to provide a fully integrated user experience.
