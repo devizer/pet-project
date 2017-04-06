@@ -41,3 +41,11 @@ Each task should be implemented on a dedicated feature branch (following the [gi
 * **_TODO-3_: Implement a simple admin interface for todo lists** using the Django admin framework as well as a third-party admin skin of your choice (e.g. Django Grappelli or Django Suit). That admin interface should feature a detail page for each available todo list, with the individual items of that list being rendered inline.
 * **_TODO-4_: Add support for versioning todo lists** by integrating and configuring the standard [Django Reversion](https://github.com/etianen/django-reversion) add-on. Make sure changes to a list of todo items (regardless of whether that change is performed via the AngularJS or Django Admin UI) automatically result in a new version record being created.
 * **_TODO-5_: Build a basic suite of functional (UI) test cases** on top of [Protractor](https://angular.github.io/protractor/#/). Use [Docker](https://www.docker.com/) to make sure this test suite can be easily executed on an arbitrary machine, such as the (headless) Linux server used for continuous integration.
+
+### AngularJS + C#/.NET
+* **_TODO-1_: Add support for managing more than one list.** This includes the ability for the user to add new/delete existing lists as well as to give each list a meaningful name. 
+* **_TODO-2_: Replace the local storage with a proper server-side back-end** implemented on top of C# 6.0, ASP.NET Web API, Entity Framework and a small embedded database of your choice. All connected clients should share the same lists. Auto-refresh of views on client-side will not be required.
+* **_TODO-3_: Add a basic build process** (using [webpack](https://webpack.github.io/)) that automatically...
+  * ...combines all JavaScript source files into a single minified asset.
+  * ...generates source maps compatible with the debugger built into the Chrome Developer Tools. 
+  * ...uses `livereload` to automatically triggers a reload of static assets in the browser as required.
