@@ -5,3 +5,6 @@ echo [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$tru
 "%outfile%" restore
 
 
+pushd TodoMvc.W3API\ui
+call npm install
+popd

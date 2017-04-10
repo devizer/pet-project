@@ -6,3 +6,11 @@ echo for($v=15; $v -ge 11; $v--) { $p="HKLM:\Software\Microsoft\MSBuild\$v.0"; $
 for /F "delims=" %%v in (%USERPROFILE%\.lastmsbuild) DO set LAST_MSBUILD=%%v
 echo Last MSBUILD: "%LAST_MSBUILD%"
 "%LAST_MSBUILD%" /t:Clean,Rebuild /p:Configuration=Debug /p:DefineConstants="TRACE;DEBUG"
+
+pushd TodoMvc.W3API\ui
+call npm run build
+mkdir ..\bin\debug\w3root
+mkdir ..\bin\release\w3root
+xcopy /y /i /s ..\w3root ..\bin\release\w3root
+xcopy /y /i /s ..\w3root ..\bin\debug\w3root
+popd
