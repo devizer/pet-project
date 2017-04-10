@@ -11,13 +11,13 @@
 * [X] **_TODO-4_: Document the REST API using Swagger**, then use some tooling such as [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) to provide a fully integrated user experience.
 
 
-#### How to build
+### How to build
 Please use 
 ```
 restore-build-test-run.cmd
 ```
 
-It downloads `nuget.exe` into %AppData%\Temp\nuget.exe, restores nuget packges, build sources using latest Visual Studio, lauches tests using nunit console runner and launch TodoMvc.W3API.exe
+It downloads `nuget.exe` into %AppData%\Temp\nuget.exe, restores nuget packges, builds sources using latest Visual Studio, lauches tests using nunit console runner and launchs TodoMvc.W3API.exe
 
 Warning! Todo.W3API.exe requires permission to open http-listener. Also it may require firewall rule.
 
