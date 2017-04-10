@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace TodoMvc.BL
 {
-    // TODO: Fix possible NullReferenceException
     public class TodoDataAccess : ITodoDataAccess
     {
         private TodoDb Db;
@@ -19,6 +18,9 @@ namespace TodoMvc.BL
 
         public long CreateList(string title)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             var entity = new TodoList() {Title = title};
             Db.TodoLists.Add(entity);
             Db.SaveChanges();
@@ -27,6 +29,9 @@ namespace TodoMvc.BL
 
         public void UpdateList(long idList, string title)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             var list = Db.TodoLists.FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
@@ -61,6 +66,9 @@ namespace TodoMvc.BL
 
         public long AddTask(long idList, string title, bool completed)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
@@ -72,6 +80,9 @@ namespace TodoMvc.BL
 
         public void UpdateTask(long idList, long idTask, string title, bool completed)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
@@ -85,6 +96,9 @@ namespace TodoMvc.BL
 
         public void UpdateTaskTitle(long idList, long idTask, string title)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
@@ -137,7 +151,13 @@ namespace TodoMvc.BL
             List<TodoList> ret = new List<TodoList>();
             foreach (var todoList in graph)
             {
-                var list = new TodoList() {Id = todoList.Id, Title = todoList.Title, Tasks = new List<TodoTask>()};
+                var list = new TodoList()
+                {
+                    Id = todoList.Id,
+                    Title = todoList.Title,
+                    Tasks = new List<TodoTask>()
+                };
+
                 foreach (var t in todoList.Tasks)
                 {
                     list.Tasks.Add(new TodoTask()
@@ -155,6 +175,4 @@ namespace TodoMvc.BL
             return ret;
         }
     }
-
-
 }
