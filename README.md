@@ -14,7 +14,9 @@
 ### How to build
 Please use 
 ```
-restore-build-test-run.cmd
+git clone https://github.com/devizer/pet-project.git
+cd pet-project
+call restore-build-test-run.cmd
 ```
 
 It downloads `nuget.exe` into %AppData%\Temp\nuget.exe, restores nuget packges, builds sources using latest Visual Studio, lauches tests using nunit console runner and launchs TodoMvc.W3API.exe
