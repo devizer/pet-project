@@ -8,12 +8,9 @@ using Microsoft.Owin.Diagnostics;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Ninject;
-using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using Swashbuckle.Application;
 using TodoMvc.BL;
-using WebApiContrib.IoC.Ninject;
 
 namespace TodoMvc.W3API
 {
