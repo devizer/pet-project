@@ -22,6 +22,8 @@ namespace TodoMvc.W3API
         public void Configuration(IAppBuilder appBuilder)
         {
             HttpConfiguration config = new HttpConfiguration();
+            config.Filters.Add(new NotFoundExceptionFilterAttribute());
+            config.Filters.Add(new NotImplExceptionFilterAttribute());
             config.EnableCors();
 
             /*
