@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="todomvc">
+<head>
+    <title>My AngularJS App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script>
+        angular.module('todomvc', []).controller('InfoCtrl',function($scope, $http) {
+             $scope.build = "loading...";
+             $http.post("api/v1/system/build-info").then(function(info) {
+               $scope.build = info.data;
+             }, 
+             function(err) { 
+               $scope.build = "error " + err.status;
+             });
+        });
+    </script>
+</head>
+<body>
+<h2 ng-controller="InfoCtrl">Here is build info: <u>{{build}}</u></h2>
+</body>
+</html>

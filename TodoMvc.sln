@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvc.BL", "TodoMvc.BL\TodoMvc.BL.csproj", "{A2EA12E9-0B78-414C-BD76-F79ADA29712E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvc.BL.Tests", "TodoMvc.BL.Tests\TodoMvc.BL.Tests.csproj", "{10BC9D72-0533-48FC-9C00-E92AB966D26A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMvc.W3API", "TodoMvc.W3API\TodoMvc.W3API.csproj", "{EDD60CFA-31B9-4E76-A076-E89F4F236592}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2EA12E9-0B78-414C-BD76-F79ADA29712E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2EA12E9-0B78-414C-BD76-F79ADA29712E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2EA12E9-0B78-414C-BD76-F79ADA29712E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2EA12E9-0B78-414C-BD76-F79ADA29712E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10BC9D72-0533-48FC-9C00-E92AB966D26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10BC9D72-0533-48FC-9C00-E92AB966D26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10BC9D72-0533-48FC-9C00-E92AB966D26A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10BC9D72-0533-48FC-9C00-E92AB966D26A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD60CFA-31B9-4E76-A076-E89F4F236592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD60CFA-31B9-4E76-A076-E89F4F236592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD60CFA-31B9-4E76-A076-E89F4F236592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD60CFA-31B9-4E76-A076-E89F4F236592}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
