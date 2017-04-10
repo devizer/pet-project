@@ -1,8 +1,10 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace TodoMvc.W3API.Controllers
 {
     [RoutePrefix(ApiPath.V1 + "/lists/{idList:long}/tasks")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TasksController : BaseControllerWithDataAccess
     {
 

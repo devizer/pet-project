@@ -22,6 +22,7 @@ namespace TodoMvc.W3API
         public void Configuration(IAppBuilder appBuilder)
         {
             HttpConfiguration config = new HttpConfiguration();
+            config.EnableCors();
 
             /*
                         config.Routes.MapHttpRoute(

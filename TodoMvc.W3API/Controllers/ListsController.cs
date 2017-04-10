@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Ninject.Web.WebApi.Filter;
 using TodoMvc.BL;
 
@@ -14,6 +15,7 @@ namespace TodoMvc.W3API.Controllers
     /// Manage Lists
     /// </summary>
     [RoutePrefix(ApiPath.V1 + "/lists")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ListsController : BaseControllerWithDataAccess
     {
 
