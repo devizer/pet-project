@@ -1,7 +1,9 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http.Filters;
+using Newtonsoft.Json;
 using TodoMvc.BL;
 
 namespace TodoMvc.W3API
@@ -10,6 +12,14 @@ namespace TodoMvc.W3API
     {
         public override void OnException(HttpActionExecutedContext context)
         {
+            string response = context.Exception != null
+                ? JsonConvert.SerializeObject(new
+                {
+                    type = context.Exception.GetType().FullName,
+                    message = context.Exception.Message
+                })
+                : null;
+
             if (context.Exception is NotImplementedException)
             {
                 context.Response = new HttpResponseMessage(HttpStatusCode.NotImplemented);
@@ -20,6 +30,7 @@ namespace TodoMvc.W3API
                 context.Response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
                     ReasonPhrase = context.Exception.Message,
+                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
                 };
             }
 
@@ -28,6 +39,7 @@ namespace TodoMvc.W3API
                 context.Response = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
                     ReasonPhrase = context.Exception.Message,
+                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
                 };
             }
 
@@ -36,6 +48,7 @@ namespace TodoMvc.W3API
                 context.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
                     ReasonPhrase = context.Exception.Message,
+                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
                 };
             }
 
