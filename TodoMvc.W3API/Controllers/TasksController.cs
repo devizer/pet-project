@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using Swashbuckle.Swagger.Annotations;
+using TodoMvc.BL;
 
 namespace TodoMvc.W3API.Controllers
 {
@@ -8,6 +9,9 @@ namespace TodoMvc.W3API.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TasksController : BaseControllerWithDataAccess
     {
+        public TasksController(ITodoDataAccess repository) : base(repository)
+        {
+        }
 
         /// <summary>
         /// Create new task

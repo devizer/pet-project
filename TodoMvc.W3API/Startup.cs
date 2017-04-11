@@ -7,7 +7,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Diagnostics;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
-using Ninject;
 using Owin;
 using Swashbuckle.Application;
 using TodoMvc.BL;
@@ -31,16 +30,12 @@ namespace TodoMvc.W3API
             */
 
 
+            // Autofaq configuration
             var builder = new ContainerBuilder();
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.Register<ITodoDataAccess>(c => new TodoDataAccess(new TodoDb()));
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = builder.Build();
-
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
-
-            // config.DependencyResolver = new NinjectResolver(CreateKernel());
-            var resolver = config.DependencyResolver;
 
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
             config.MapHttpAttributeRoutes();
@@ -54,18 +49,19 @@ namespace TodoMvc.W3API
                 .EnableSwaggerUi();
 
 
-#if DEBUG
-            appBuilder.UseErrorPage(ErrorPageOptions.ShowAll);
-#endif
-
-            // appBuilder.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(config);
 
             appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseAutofacWebApi(config);
             appBuilder.UseWebApi(config);
 
+#if DEBUG
+            appBuilder.UseErrorPage(ErrorPageOptions.ShowAll);
+#endif
 
 
+
+
+            // Static Files configuration
             var physicalFileSystem = new PhysicalFileSystem("w3root");
             var options = new FileServerOptions
             {
@@ -80,20 +76,8 @@ namespace TodoMvc.W3API
                 "index.htm", "default.htm",
             };
             appBuilder.UseFileServer(options);
-
-
         }
 
-        private static IKernel CreateKernel()
-        {
-            var kernel = new StandardKernel() ;
-            kernel.Bind<ITodoDataAccess>().ToConstructor(_ => new TodoDataAccess(new TodoDb()));
-            return kernel;
-        }
     }
-
-
-
-
 }
 

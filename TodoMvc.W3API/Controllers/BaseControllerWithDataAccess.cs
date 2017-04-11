@@ -10,12 +10,15 @@ namespace TodoMvc.W3API.Controllers
 {
     public abstract class BaseControllerWithDataAccess : ApiController
     {
-        protected virtual ITodoDataAccess Repository { get; private set; }
+        protected virtual ITodoDataAccess Repository { get; set; }
 
-        public BaseControllerWithDataAccess()
+        // Here is the simple way to force an injection
+        protected BaseControllerWithDataAccess(ITodoDataAccess repository)
         {
-            // we are using TodoDB connection string from config
-            Repository = new TodoDataAccess(new TodoDb());
+            if (repository == null)
+                throw new ArgumentNullException(nameof(repository));
+
+            Repository = repository;
         }
     }
 }

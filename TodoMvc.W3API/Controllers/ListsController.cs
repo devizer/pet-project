@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Ninject.Web.WebApi.Filter;
 using Swashbuckle.Swagger.Annotations;
 using TodoMvc.BL;
 
@@ -20,6 +19,9 @@ namespace TodoMvc.W3API.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ListsController : BaseControllerWithDataAccess
     {
+        public ListsController(ITodoDataAccess repository) : base(repository)
+        {
+        }
 
         /// <summary>
         /// Create new List
