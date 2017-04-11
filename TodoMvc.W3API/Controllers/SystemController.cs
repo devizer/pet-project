@@ -18,7 +18,7 @@ namespace TodoMvc.W3API.Controllers
         /// <summary>
         /// Returns the build number and a kind of configuration (development | production)
         /// </summary>
-        [Route("build-info"), AcceptVerbs("GET", "POST"), ExpiresImmediately]
+        [Route("build-info"), AcceptVerbs("POST"), ExpiresImmediately]
         public string GetBuildInfo()
         {
 #if DEBUG
@@ -30,5 +30,6 @@ namespace TodoMvc.W3API.Controllers
                 typeof(TodoDb).Assembly.GetName().Version,
                 suffix);
         }
+
     }
 }

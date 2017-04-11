@@ -12,46 +12,34 @@ namespace TodoMvc.W3API
     {
         public override void OnException(HttpActionExecutedContext context)
         {
-            string response = context.Exception != null
-                ? JsonConvert.SerializeObject(new
-                {
-                    type = context.Exception.GetType().FullName,
-                    message = context.Exception.Message
-                })
-                : null;
+
+            HttpStatusCode? status = null;
 
             if (context.Exception is NotImplementedException)
-            {
-                context.Response = new HttpResponseMessage(HttpStatusCode.NotImplemented);
-            }
+                status = HttpStatusCode.NotImplemented;
 
             else if (context.Exception is NotFoundException)
-            {
-                context.Response = new HttpResponseMessage(HttpStatusCode.NotFound)
-                {
-                    ReasonPhrase = context.Exception.Message,
-                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
-                };
-            }
+                status = HttpStatusCode.NotFound;
 
             else if (context.Exception is ArgumentException)
-            {
-                context.Response = new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    ReasonPhrase = context.Exception.Message,
-                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
-                };
-            }
+                status = HttpStatusCode.BadRequest;
 
-            else if (context.Exception != null)
+            if (status != null)
             {
-                context.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
-                {
-                    ReasonPhrase = context.Exception.Message,
-                    Content = response == null ? null : new StringContent(response, Encoding.UTF8, "application/json"),
-                };
-            }
+                context.Response = new HttpResponseMessage(status.Value);
 
+                if (context.Exception != null)
+                {
+                    string response = JsonConvert.SerializeObject(new
+                    {
+                        type = context.Exception.GetType().FullName,
+                        message = context.Exception.Message
+                    });
+
+                    context.Response.ReasonPhrase = context.Exception.Message;
+                    context.Response.Content = new StringContent(response, Encoding.UTF8, "application/json");
+                }
+            }
         }
     }
 }
