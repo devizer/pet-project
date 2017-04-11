@@ -23,9 +23,9 @@ namespace TodoMvc.W3API.Controllers
         /// Create new List
         /// </summary>
         [HttpPut, Route("")]
-        public long Add(string title)
+        public IdResponse Add(string title)
         {
-            return Repository.CreateList(title);
+            return new IdResponse(Repository.CreateList(title));
         }
 
         /// <summary>

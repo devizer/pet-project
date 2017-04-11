@@ -184,8 +184,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentExceptionFilterAttribute.cs" />
     <Compile Include="Controllers\ApiPath.cs" />
     <Compile Include="Controllers\BaseControllerWithDataAccess.cs" />
+    <Compile Include="Controllers\IdResponse.cs" />
     <Compile Include="Controllers\ListsController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\TasksController.cs" />

@@ -12,9 +12,9 @@ namespace TodoMvc.W3API.Controllers
         /// Create new task
         /// </summary>
         [HttpPut, Route("")]
-        public long AddTask(long idList, string title, bool completed)
+        public IdResponse AddTask(long idList, string title, bool completed)
         {
-            return Repository.AddTask(idList, title, completed);
+            return new IdResponse(Repository.AddTask(idList, title, completed));
         }
 
         /// <summary>
