@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TodoMvc.BL
 {
-    public class TodoDataAccess : ITodoDataAccess
+    public class TodoDataAccess : ITodoDataAccess, IDisposable
     {
         private TodoDb Db;
 
@@ -55,9 +55,9 @@ namespace TodoMvc.BL
             Db.SaveChanges();
         }
 
-        public IEnumerable<TodoTask> SelectTasks(long idList, TaskStatus status)
+        public TodoList SelectTasks(long idList, TaskStatus status)
         {
-            var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
+            var list = Db.TodoLists.AsNoTracking().Include("Tasks").FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
             var query = Db.TodoTasks.AsNoTracking().Where(x => x.IdList == idList);
@@ -66,7 +66,12 @@ namespace TodoMvc.BL
             else if (status == TaskStatus.Completed)
                 query = query.Where(x => x.Completed);
 
-            return query;
+            return Copy(new TodoList()
+            {
+                Id = idList,
+                Tasks = query.ToList(),
+                Title = list.Title
+            });
         }
 
 
@@ -163,28 +168,37 @@ namespace TodoMvc.BL
             List<TodoList> ret = new List<TodoList>();
             foreach (var todoList in graph)
             {
-                var list = new TodoList()
-                {
-                    Id = todoList.Id,
-                    Title = todoList.Title,
-                    Tasks = new List<TodoTask>()
-                };
-
-                foreach (var t in todoList.Tasks)
-                {
-                    list.Tasks.Add(new TodoTask()
-                    {
-                        Id = t.Id,
-                        IdList = t.IdList,
-                        Title = t.Title,
-                        Completed = t.Completed
-                    });
-                }
-
-                ret.Add(list);
+                ret.Add(Copy(todoList));
             }
 
             return ret;
+        }
+
+        private static TodoList Copy(TodoList todoList)
+        {
+            var list = new TodoList()
+            {
+                Id = todoList.Id,
+                Title = todoList.Title,
+                Tasks = new List<TodoTask>()
+            };
+
+            foreach (var t in todoList.Tasks)
+            {
+                list.Tasks.Add(new TodoTask()
+                {
+                    Id = t.Id,
+                    IdList = t.IdList,
+                    Title = t.Title,
+                    Completed = t.Completed
+                });
+            }
+            return list;
+        }
+
+        public void Dispose()
+        {
+            Db.Dispose();
         }
     }
 }

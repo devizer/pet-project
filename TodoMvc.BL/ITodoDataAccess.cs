@@ -15,7 +15,7 @@ namespace TodoMvc.BL
         long CreateList(string title);
         void UpdateList(long idList, string title);
         void DeleteList(long idList);
-        IEnumerable<TodoTask> SelectTasks(long idList, TaskStatus status);
+        TodoList SelectTasks(long idList, TaskStatus status);
         long AddTask(long idList, string title, bool completed);
         void UpdateTask(long idList, long idTask, string title, bool completed);
         void UpdateTaskTitle(long idList, long idTask, string title);
