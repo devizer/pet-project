@@ -41,7 +41,7 @@ namespace TodoMvc.BL
 
         public void DeleteList(long idList)
         {
-            var list = Db.TodoLists.AsNoTracking().Include("Tasks").FirstOrDefault(x => x.Id == idList);
+            var list = Db.TodoLists.Include("Tasks").FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
             Db.TodoTasks.RemoveRange(list.Tasks);
