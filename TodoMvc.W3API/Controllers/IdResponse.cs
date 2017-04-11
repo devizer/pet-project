@@ -4,7 +4,7 @@ namespace TodoMvc.W3API.Controllers
 {
     public class IdResponse
     {
-        [JsonProperty("id")]
+        [JsonProperty("Id")]
         public long Id { get; set; }
 
         public IdResponse()
