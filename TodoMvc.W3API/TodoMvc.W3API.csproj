@@ -184,7 +184,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentExceptionFilterAttribute.cs" />
     <Compile Include="Controllers\ApiPath.cs" />
     <Compile Include="Controllers\BaseControllerWithDataAccess.cs" />
     <Compile Include="Controllers\IdResponse.cs" />
@@ -192,8 +191,7 @@
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="ExpiresImmediatelyAttribute.cs" />
-    <Compile Include="NotFoundExceptionFilterAttribute.cs" />
-    <Compile Include="NotImplExceptionFilterAttribute.cs" />
+    <Compile Include="SmartyExceptionTransformerAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
