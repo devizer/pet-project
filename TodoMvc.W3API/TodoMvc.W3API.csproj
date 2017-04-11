@@ -203,6 +203,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Controllers\Swagger Issue 1760.txt" />
     <Content Include="w3root\default.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

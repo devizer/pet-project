@@ -1,0 +1,3 @@
+﻿"Object is not a primitive" is a swagger problem:
+
+https://github.com/swagger-api/swagger-ui/issues/1760

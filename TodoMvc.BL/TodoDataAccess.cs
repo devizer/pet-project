@@ -21,6 +21,9 @@ namespace TodoMvc.BL
             if (title == null)
                 throw new ArgumentNullException("title");
 
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("title should have at least one non-space character");
+
             var entity = new TodoList() {Title = title};
             Db.TodoLists.Add(entity);
             Db.SaveChanges();
@@ -31,6 +34,9 @@ namespace TodoMvc.BL
         {
             if (title == null)
                 throw new ArgumentNullException("title");
+
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("title should have at least one non-space character");
 
             var list = Db.TodoLists.FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
@@ -83,6 +89,9 @@ namespace TodoMvc.BL
             if (title == null)
                 throw new ArgumentNullException("title");
 
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("title should have at least one non-space character");
+
             var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");
 
@@ -98,6 +107,9 @@ namespace TodoMvc.BL
         {
             if (title == null)
                 throw new ArgumentNullException("title");
+
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("title should have at least one non-space character");
 
             var list = Db.TodoLists.AsNoTracking().FirstOrDefault(x => x.Id == idList);
             if (list == null) NotFoundException.Throw("TodoList");

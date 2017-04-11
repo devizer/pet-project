@@ -21,7 +21,7 @@ namespace TodoMvc.BL
             throw Create(entityType);
         }
 
-        public NotFoundException()
+        public NotFoundException() : this("Requested entity not found")
         {
         }
 

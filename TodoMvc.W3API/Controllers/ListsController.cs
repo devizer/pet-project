@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Ninject.Web.WebApi.Filter;
+using Swashbuckle.Swagger.Annotations;
 using TodoMvc.BL;
 
 namespace TodoMvc.W3API.Controllers
@@ -23,6 +25,7 @@ namespace TodoMvc.W3API.Controllers
         /// Create new List
         /// </summary>
         [HttpPut, Route("")]
+        [SwaggerResponse(400, "List's title is required.")]
         public IdResponse Add(string title)
         {
             return new IdResponse(Repository.CreateList(title));
@@ -41,6 +44,7 @@ namespace TodoMvc.W3API.Controllers
         /// Delete the List
         /// </summary>
         [HttpDelete, Route("{idList:long}")]
+        [SwaggerResponse(404, "Specified list not found")]
         public void Delete(long idList)
         {
             Repository.DeleteList(idList);
@@ -50,6 +54,8 @@ namespace TodoMvc.W3API.Controllers
         /// Update list's title
         /// </summary>
         [HttpPost, Route("{idList:long}/title")]
+        [SwaggerResponse(404, "Specified list not found")]
+        [SwaggerResponse(400, "List's title is required.")]
         public void Update(long idList, string title)
         {
             Repository.UpdateList(idList, title);
