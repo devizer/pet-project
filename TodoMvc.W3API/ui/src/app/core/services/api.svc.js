@@ -96,7 +96,7 @@ export default function(app){
             );
         };
 
-        // update task
+        // update list title
         function updateList(query, fn){
             if (!query){
                 return;
@@ -104,7 +104,6 @@ export default function(app){
             url.updList.save(
                 query,
                 function(s){
-                    // getList(s);
                     fn && fn(s);
                 },
                 function(er){

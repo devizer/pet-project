@@ -2,4 +2,4 @@
     <input class="new-todo" placeholder="Add new List" ng-model="$ctrl.newList" autofocus>
 </form>
 
-<todo-list ng-repeat="list in $ctrl.lists" ng-model="list"></todo-list>
+<todo-list ng-repeat="list in $ctrl.lists.slice().reverse()" ng-model="list"></todo-list>

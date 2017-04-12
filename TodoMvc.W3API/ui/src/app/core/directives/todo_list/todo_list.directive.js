@@ -70,11 +70,18 @@ function todoListComponent($log){
         /*$ctrl.saveTodo = function (todo) {
             // store.put(todo);
         };*/
-
         $ctrl.toggleCompleted = function (todo, completed) {
             if (angular.isDefined(completed)) {
-                todo.completed = completed;
+                todo.Completed = completed;
             }
+            var query = {
+                idList: todo.IdList,
+                id:     todo.Id,
+                completed:  todo.Completed
+            };
+
+            api.updateStatus(query, function(res){
+            });
         };
 
         $ctrl.clearCompletedTodos = function () {
@@ -93,8 +100,22 @@ function todoListComponent($log){
 
         /* ========== rewrited methods ========== */
 
+        // edit list title
+        $ctrl.editListTitle = function(id, title){
+
+            var query = {
+                Id: id,
+                Title: title
+            };
+
+            api.updateList(query, function(res){
+                console.log(res);
+                // $ctrl.list.Title = query.Title;
+            });
+        };
+
         // remove list
-        $ctrl.removeList = function (list) {
+        $ctrl.removeList = function (list){
             api.deleteList(list.Id);
         };
 
@@ -151,23 +172,18 @@ function todoListComponent($log){
                 return;
             }
 
-            //todo.title = todo.title.trim();
-
             if (todo.Title === $ctrl.originalTodo.Title){
                 $ctrl.editedTodo = null;
                 return;
             }
             else {
                 todo.Title = todo.Title.trim();
-                // console.log(todo);
                 var query = {
                     idList: todo.IdList,
                     id:     todo.Id,
                     title:  todo.Title
                 };
-                console.log(query);
                 api.updateTitle(query, function(res){
-                    console.log(res);
                     $ctrl.editedTodo = null;
                     return;
                 });
@@ -175,7 +191,7 @@ function todoListComponent($log){
         };
 
         // update task status
-
+        
     }
 }
 

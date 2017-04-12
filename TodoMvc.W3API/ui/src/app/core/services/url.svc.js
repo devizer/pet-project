@@ -21,7 +21,11 @@ export default function(app) {
                                     }
                                 }                                                                       ),  // get / query, put | get all todo-lists and their tasks
             delList:    $resource( baseUrl + "api/v1/lists/:id"                                         ),  // delete | delete list
-            updList:    $resource( baseUrl + "api/v1/lists/:id/title", {title:'@title'}                 ),  // post | update list's item
+            updList:    $resource( baseUrl + "api/v1/lists/:id/title",
+                                {
+                                    id:   '@Id',
+                                    title:'@Title'
+                                }                                                                       ),  // post | update list's item
 
             // System
             sysInfo:    $resource( baseUrl + "api/v1/system/build-info"                                 ),  // get, post | get system build info
@@ -47,7 +51,9 @@ export default function(app) {
                                 }                                                                       ),  // post | update task's title
             updStatus:  $resource( baseUrl + "api/v1/lists/:idList/tasks/:id/completed",
                                 {
-                                    completed: '@Completed'
+                                    id:        '@id',
+                                    idList:    '@idList',
+                                    completed: '@completed'
                                 }                                                                       )   // post | update task's status
         };
 
